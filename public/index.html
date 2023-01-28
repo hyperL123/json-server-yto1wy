@@ -1,46 +1,70 @@
 <!DOCTYPE html>
-
-<html lang="en">
+<html lang="en-US">
   <head>
-    <title>Home</title>
-
+    <title>Student Logs</title>
     <meta charset="UTF-8" />
 
-    <meta name="viewport" content="width=device-width" />
+    <link
+      rel="shortcut icon"
+      href="https://cdn.sstatic.net/Sites/stackoverflow/img/favicon.ico"
+      type="image/x-icon"
+    />
 
-    <!--
-
-      Need a visual blank slate?
-
-      Remove all code in `styles.css`!
-
-    -->
-
-    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+    />
   </head>
-
   <body>
-    <h1>Home page</h1>
+    <h1>hello world</h1>
+    <p id="ll">123123123</p>
+    <form class="bg-gray-200 rounded-lg p-4">
+      <label class="font-bold" for="uvuId">Course </label><br />
+      <select
+        aria-label="Select Course"
+        id="course"
+        name="course"
+        data-cy="course_select"
+        class="bg-white p-2 rounded-lg"
+      >
+        <option selected value="">Choose Courses</option>
+      </select>
+      <br />
+      <br />
 
-    <div class="log">
-      <h2>ONE</h2>
+      <label class="font-bold" for="uvuId">UVU ID</label><br />
 
-      <div class="log-text">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque ut magni
-        quos.
-      </div>
-    </div>
+      <input
+        type="text"
+        id="uvuId"
+        name="uvuId"
+        data-cy="uvuId_input"
+        class="bg-white p-2 rounded-lg"
+        style="display: none"
+        placeholder="10234567"
+      />
+      <h3 id="uvuIdDisplay" data-cy="uvuIdDisplay"></h3>
+      <ul data-cy="logs" id="logs"></ul>
 
-    <div class="log" id="second">
-      <h2>TWO</h2>
-
-      <div class="log-text">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-        praesentium nemo voluptatem aspernatur harum quis obcaecati eum
-        quibusdam sit veritatis!
-      </div>
-    </div>
-
+      <label class="font-bold">New Log</label><br />
+      <textarea
+        style="height: 75px"
+        aria-label="add log textarea"
+        data-cy="log_textarea"
+        id="log_textarea"
+        class="bg-white p-2 rounded-lg"
+      ></textarea
+      ><br />
+      <button
+        type="submit"
+        id="add_log_btn"
+        data-cy="add_log_btn"
+        class="bg-green-500 text-white p-2 rounded-lg"
+      >
+        Add Log
+      </button>
+    </form>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="module" src="script.js"></script>
   </body>
 </html>
