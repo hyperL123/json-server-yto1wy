@@ -1,43 +1,59 @@
-// let $ = (sel) => [...document.querySelectorAll(sel)];
-
-// window.onload =
-
 let $ = (sel) => {
-  let els = [...document.querySelectorAll(sel)];
+  let els;
+  if (sel.startsWith('#')) {
+    let newString = sel.substring(1);
+    els = document.getElementById(newString);
+  } else {
+    els = [...document.querySelectorAll(sel)];
+  }
+
+  function hideText() {
+    var pTag = els.querySelector('pre');
+    if (pTag.style.display === 'none') {
+      pTag.style.display = 'block';
+    } else {
+      pTag.style.display = 'none';
+    }
+  }
 
   return {
     css: (propName, value) => {
-      els.forEach((el) => (el.style[propName] = value));
+      if (sel.startsWith('#')) {
+        els.style[propName] = value;
+      } else {
+        els.forEach((el) => (el.style[propName] = value));
+      }
     },
 
     toggle: () => {
-      alert('toggle');
-
-      els.forEach((el) => el); //does nothing; placeholder
-
-      //TODO if showing, hide
-
-      //TODO if hidden, show
+      els.addEventListener('click', hideText, false);
     },
 
     click: (callBackFn) => {
-      els.forEach(callBackFn); //does nothing; placeholder
+      if (sel.startsWith('#')) {
+        els.addEventListener('click', callBackFn, false);
+      } else {
+        els.forEach((el) => el.addEventListener('click', callBackFn, false));
+      }
+    },
+    change: (callBackFn) => {
+      if (sel.startsWith('#')) {
+        els.addEventListener('change', callBackFn, false);
+      } else {
+        els.forEach((el) => el.addEventListener('change', callBackFn, false));
+      }
+    },
 
-      //TODO assign the click event the selected elements
+    getByID: () => {
+      return els;
+    },
+    getValue: () => {
+      return els.value;
+    },
+    createElement: () => {
+      return document.createElement(`${sel}`);
     },
   };
 };
 
-function exampleUsage() {
-  $('h1').css('color', 'red');
-
-  $('h2').css('color', 'green');
-
-  $('#second').toggle();
-
-  $('div').toggle();
-
-  $('.log').click(() => alert('click')); //alert callback is a form of stubbing
-}
-
-exampleUsage();
+export default $;
